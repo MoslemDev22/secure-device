@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dgSpecHash": "DyoDvnttFrY=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\MOSLEM-PC\\source\\repos\\SecureDeviceAgent\\SecureDeviceAgent\\SecureDeviceAgent.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MOSLEM-PC\\.nuget\\packages\\system.codedom\\10.0.12\\system.codedom.10.0.12.nupkg.sha512",
+    "C:\\Users\\MOSLEM-PC\\.nuget\\packages\\system.configuration.configurationmanager\\10.0.12\\system.configuration.configurationmanager.10.0.12.nupkg.sha512",
+    "C:\\Users\\MOSLEM-PC\\.nuget\\packages\\system.diagnostics.eventlog\\10.0.12\\system.diagnostics.eventlog.10.0.12.nupkg.sha512",
+    "C:\\Users\\MOSLEM-PC\\.nuget\\packages\\system.diagnostics.performancecounter\\10.0.12\\system.diagnostics.performancecounter.10.0.12.nupkg.sha512",
+    "C:\\Users\\MOSLEM-PC\\.nuget\\packages\\system.management\\10.0.12\\system.management.10.0.12.nupkg.sha512",
+    "C:\\Users\\MOSLEM-PC\\.nuget\\packages\\system.security.cryptography.protecteddata\\10.0.12\\system.security.cryptography.protecteddata.10.0.12.nupkg.sha512",
+    "C:\\Users\\MOSLEM-PC\\.nuget\\packages\\system.threading.accesscontrol\\10.0.12\\system.threading.accesscontrol.10.0.12.nupkg.sha512",
+    "C:\\Users\\MOSLEM-PC\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.24\\microsoft.windowsdesktop.app.ref.8.0.24.nupkg.sha512",
+    "C:\\Users\\MOSLEM-PC\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.24\\microsoft.netcore.app.ref.8.0.24.nupkg.sha512",
+    "C:\\Users\\MOSLEM-PC\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.24\\microsoft.aspnetcore.app.ref.8.0.24.nupkg.sha512",
+    "C:\\Users\\MOSLEM-PC\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.24\\microsoft.netcore.app.host.win-x64.8.0.24.nupkg.sha512"
+  ],
+  "logs": []
+}

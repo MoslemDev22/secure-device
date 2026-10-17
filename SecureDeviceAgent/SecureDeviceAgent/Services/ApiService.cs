@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -11,6 +12,7 @@ namespace SecureDeviceAgent.Services
     public class ApiService
     {
         private readonly HttpClient _httpClient;
+        private readonly SystemInfoService _systemInfoService;
 
         private const string BaseUrl =
             "https://moslemdev.ir/api/";
@@ -22,6 +24,8 @@ namespace SecureDeviceAgent.Services
                 BaseAddress = new Uri(BaseUrl),
                 Timeout = TimeSpan.FromSeconds(30)
             };
+
+            _systemInfoService = new SystemInfoService();
         }
 
         public async Task<string> RegisterDeviceAsync(
@@ -124,10 +128,26 @@ namespace SecureDeviceAgent.Services
 
         public async Task<string> SendHeartbeatAsync()
         {
+            var requestData = new
+            {
+                ip_address =
+                    _systemInfoService.GetLocalIpAddress()
+            };
+
+            string json =
+                JsonSerializer.Serialize(requestData);
+
+            using StringContent content =
+                new StringContent(
+                    json,
+                    Encoding.UTF8,
+                    "application/json"
+                );
+
             HttpResponseMessage response =
                 await _httpClient.PostAsync(
                     "device/heartbeat.php",
-                    null
+                    content
                 );
 
             string responseBody =

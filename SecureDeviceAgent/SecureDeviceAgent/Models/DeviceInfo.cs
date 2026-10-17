@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿
+using System.Text.Json.Serialization;
 
 namespace SecureDeviceAgent.Models
 {
@@ -12,6 +13,9 @@ namespace SecureDeviceAgent.Models
 
         [JsonPropertyName("hostname")]
         public string Hostname { get; set; } = string.Empty;
+
+        [JsonPropertyName("ip_address")]
+        public string? IpAddress { get; set; }
 
         [JsonPropertyName("os_name")]
         public string OsName { get; set; } = string.Empty;

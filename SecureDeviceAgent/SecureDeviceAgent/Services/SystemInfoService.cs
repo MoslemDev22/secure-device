@@ -1,6 +1,11 @@
-﻿using System;
+﻿
+using System;
 using System.IO;
+using System.Linq;
 using System.Management;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
 namespace SecureDeviceAgent.Services
@@ -20,6 +25,63 @@ namespace SecureDeviceAgent.Services
         public string GetArchitecture()
         {
             return RuntimeInformation.OSArchitecture.ToString();
+        }
+
+        public string GetLocalIpAddress()
+        {
+            foreach (NetworkInterface networkInterface
+                in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (networkInterface.OperationalStatus
+                    != OperationalStatus.Up)
+                {
+                    continue;
+                }
+
+                if (networkInterface.NetworkInterfaceType
+                    == NetworkInterfaceType.Loopback)
+                {
+                    continue;
+                }
+
+                IPInterfaceProperties properties =
+                    networkInterface.GetIPProperties();
+
+                bool hasDefaultGateway =
+                    properties.GatewayAddresses.Any(gateway =>
+                        gateway.Address.AddressFamily
+                            == AddressFamily.InterNetwork
+                        && !gateway.Address.Equals(IPAddress.Any));
+
+                if (!hasDefaultGateway)
+                {
+                    continue;
+                }
+
+                foreach (UnicastIPAddressInformation address
+                    in properties.UnicastAddresses)
+                {
+                    if (address.Address.AddressFamily
+                            != AddressFamily.InterNetwork)
+                    {
+                        continue;
+                    }
+
+                    if (IPAddress.IsLoopback(address.Address))
+                    {
+                        continue;
+                    }
+
+                    if (address.Address.Equals(IPAddress.Any))
+                    {
+                        continue;
+                    }
+
+                    return address.Address.ToString();
+                }
+            }
+
+            return string.Empty;
         }
 
         public string GetCpuName()
@@ -54,9 +116,7 @@ namespace SecureDeviceAgent.Services
                 if (os["TotalVisibleMemorySize"] != null)
                 {
                     long kb =
-                        Convert.ToInt64(
-                            os["TotalVisibleMemorySize"]
-                        );
+                        Convert.ToInt64(os["TotalVisibleMemorySize"]);
 
                     return kb / 1024;
                 }
@@ -113,10 +173,7 @@ namespace SecureDeviceAgent.Services
                 1024.0 /
                 1024.0;
 
-            return Math.Round(
-                totalGb - freeGb,
-                2
-            );
+            return Math.Round(totalGb - freeGb, 2);
         }
 
         public double GetDiskUsagePercent()
@@ -139,10 +196,7 @@ namespace SecureDeviceAgent.Services
                     100.0
                 );
 
-            return Math.Round(
-                usage,
-                2
-            );
+            return Math.Round(usage, 2);
         }
     }
 }

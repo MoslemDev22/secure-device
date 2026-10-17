@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace SecureDeviceAgent.Services
                 DeviceUuid = GetDeviceUuid(),
                 DeviceName = _systemInfoService.GetComputerName(),
                 Hostname = _systemInfoService.GetComputerName(),
+                IpAddress = _systemInfoService.GetLocalIpAddress(),
                 OsName = "Windows",
                 OsVersion = GetWindowsVersion(),
                 Architecture = _systemInfoService.GetArchitecture(),
